@@ -17,6 +17,9 @@ if(isset($_GET['logout']))
 }
 
 ?>
+<?php
+
+$errors = array();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,35 +31,30 @@ if(isset($_GET['logout']))
 
 <link rel="stylesheet" href="style1.css">
 <script src= "main.js"></script>
-<script> 
 
-   movieshome();
-   serieshome();
-</script>
 <title>Home Page</title>
 </head>
   <body>
- 
-  <form class="formx" method="post">
+<form method="post" action="explore.php">
+  <div class="formx" method="post">
 <div class="row">
   <div class="col-sm-6">
   <?php if(isset($_SESSION['username'])) : ?>
   
       
   <h1>Welcome <strong><?php echo $_SESSION['username']; ?></strong></h1>
-  <input type="text" placeholder="Search Movies...." id='search' onkeyup="showResult(this.value)">
-  <button class="btn btn-primary" onclick="getPosts();" type="button" id='search1'>search</button>
+
 	  <?php endif ?>
 </div>
 <div class="col-sm-6">
         <nav>
              <ul>
              
-               <li class="active"><a href="">Home</a></li>
+               <li ><a href="index.php">Home</a></li>
                <li><a href="profile.php">Profile</a></li>
               
                
-               <li><a href="explore.php">connect others &#128104</a></li>
+               <li class="active"><a href="explore.php">connect others &#128104</a></li>
                <li> <a href="index.php?logout='1'">logout</a> </li>
             </ul>
 
@@ -64,31 +62,67 @@ if(isset($_GET['logout']))
 
 </div>
 </div>
-<br>
-    <br><br>
-<div id="output" class="row">
-<br>
-    <br><br>
-
-
+</div><br>
+    <br>
 <div class="row">
-    <div class="moviehome">
-<h1>MOVIES</h1>
-</div></div>
-<br><br>
-<div id="output1" class="row"></div><br>
-    <br><br>
+    <div class="col-sm-6">
+        <div class="viewpula">
+<?php
+
+$y='con';
+
+echo "
+<input type='text' name='ress' placeholder='view others..' id='searchv' >
+  <button name='$y' class='btn btn-primary' type='submit'  >search</button>
+ ";
+ ?>
+</div></div></div></div>
 <div class="row">
-    <div class="moviehome">  
-<h1>SERIES</h1>
-</div></div>
-<br><br>
-<div id="output2" class="row"></div>
+<?php 
+$d='con';
+if(isset($_POST[$d]))
+
+{
+
+  
+    
+    $db= mysqli_connect('localhost','root','', 'movie')or die("could not connect database..");
+$sc=$_POST['ress'];
+$_SESSION['pip']=$sc;
+$usernamed= $_SESSION['username'];
+echo $sc;
+$db= mysqli_connect('localhost','root','', 'movie')or die("could not connect database..");
+$sql="SELECT DISTINCT users, act FROM activites WHERE users='$sc' ";
+$resultf=mysqli_query($db, $sql);
+
+while($rowv=mysqli_fetch_array($resultf))
+{   
+    $act=$rowv['users'];
+    ?>
+     <div class=' col-sm-3'>
+      <div class="backe">
+      <img  src="avatar.png">
+      <h5>user: <?php echo $act ?></h5>
+      <button type="submit" class="btn btn-primary" name="pf">View profile</button>
+       </div>
+       </div>
+
+     <?php
+}}
+if(isset($_POST['pf']))
+{
+
+    $name=$_SESSION['pip'];
+   
+    header("location: borm.php?ID=$name");
+  
+
+}
+?>
 
 </div>
+
 </form>
-
-
 </body>
 	  
 	   </html>

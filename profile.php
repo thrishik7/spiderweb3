@@ -96,7 +96,50 @@ function notwatchf(movieId)
 //}
 }
 
+function privatef()
+{
+    
+    $.ajax({
+       url:"private.php",
+       method:"post",
+       
+       success: function(res){
+           console.log(res);
+       }
+    })  
 
+  
+   
+    // farray.push(movieId);
+
+    // localStorage.fa1Records=JSON.stringify(farray);
+     //if(localStorage.fa1Records){
+     //fdarray=JSON.parse(localStorage.fa1Records);
+     //console.log(fdarray);
+//}
+}
+function aprivatef()
+{
+    
+    $.ajax({
+       url:"aprivate.php",
+       method:"post",
+       
+       success: function(res){
+           console.log(res);
+       }
+    })  
+
+  
+   
+    // farray.push(movieId);
+
+    // localStorage.fa1Records=JSON.stringify(farray);
+     //if(localStorage.fa1Records){
+     //fdarray=JSON.parse(localStorage.fa1Records);
+     //console.log(fdarray);
+//}
+}
 
 
 
@@ -122,7 +165,7 @@ function notwatchf(movieId)
              
                <li ><a href="index.php">Home</a></li>
                <li class="active" ><a href=>Profile</a></li>
-                <li><a href="">Favourites</a></li>
+               <li><a href="explore.php">connect others &#128104</a></li>
                <li> <a href="index.php?logout='1'">logout</a> </li>
             </ul>
 
@@ -146,10 +189,9 @@ function notwatchf(movieId)
              <img src="avatar.png" class="avatar">
              <div class="bame"><p><?php echo $_SESSION['username']; ?></p></div>
 </div><ul>
-               <li class="active"><a href="profile.php">Favourites</a></li>
+               <li class="active"><a href="profile.php">Favourites &#128525</a></li>
                <li ><a href="profile1.php">YET TO WATCH</a></li>
-           
-            </ul>
+               <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Flocalhost%2Fspidertask3%2Fprofile.php&layout=button_count&size=large&width=84&height=28&appId" width="84" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>          </ul>
 
         </nav>
 
@@ -257,7 +299,24 @@ echo "</div>
 <div class="col-sm-6">
 <div class="backab">
 <h1>ACTIVITY</h1>
-    <ul class="list-group" >
+<?php
+$usernamed= $_SESSION['username'];
+$db= mysqli_connect('localhost','root','', 'movie')or die("could not connect database..");
+$sql="SELECT DISTINCT users, act FROM activites WHERE users='$usernamed' ";
+$resultf=mysqli_query($db, $sql);
+
+if($resultf)
+{   $rowv=mysqli_fetch_array($resultf);
+    $act=$rowv['act'];
+   
+if($act=='private'){?>
+<button  type='submit' onclick="aprivatef()"  class='btn btn-success'>PRIVATE &#9989 </button>
+<?php }?>   
+<?php if($act=='not private'){?>
+<button  type='submit' onclick="privatef()"  class='btn btn-basic'>PRIVATE  </button>
+<?php }
+}?>   
+<ul class="list-group" >
     
     <?php 
 $usernamed= $_SESSION['username'];

@@ -122,7 +122,7 @@ function notwatchf(movieId)
              
                <li ><a href="index.php">Home</a></li>
                <li class="active" ><a href=>Profile</a></li>
-                <li><a href="">Favourites</a></li>
+               <li><a href="explore.php">connect others &#128104</a></li>
                <li> <a href="index.php?logout='1'">logout</a> </li>
             </ul>
 
@@ -145,7 +145,7 @@ function notwatchf(movieId)
              <img src="avatar.png" class="avatar">
              <div class="bame"><p><?php echo $_SESSION['username']; ?></p></div>
 </div><ul>
-               <li><a href="profile.php">Favourites</a></li>
+               <li><a href="profile.php">Favourites &#128525 </a></li>
                <li  class="active"><a href="profile1.php">YET TO WATCH</a></li>
            
             </ul>

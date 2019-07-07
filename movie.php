@@ -95,7 +95,7 @@ if(isset($_GET['logout']))
                <li><a href="profile.php">Profile</a></li>
               
                
-               <li><a href="">Favourites</a></li>
+               <li><a href="explore.php">connect others &#128104</a></li>
                <li> <a href="index.php?logout='1'">logout</a> </li>
             </ul>
 
@@ -154,6 +154,15 @@ $sql = "CREATE TABLE `$usernamed` (
     PRIMARY KEY(id)
   )";
   mysqli_query($db, $sql);
-
+ 
+  $sql = "CREATE TABLE `activites` (
+    id  INT(6) UNSIGNED AUTO_INCREMENT , 
+    users VARCHAR(255) ,
+     act VARCHAR(255),
+    PRIMARY KEY(id)
+  )";
+  mysqli_query($db, $sql);
+  $sql="INSERT INTO `activites` (`users`,`act`) VALUES ('$usernamed','not private');";
+  mysqli_query($db, $sql);
 
 ?>
